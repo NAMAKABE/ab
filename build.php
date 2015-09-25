@@ -3,15 +3,15 @@
 /* 并发连接 */
 $concurrency = 3000;
 /* 请求次数 */
-$number = 5;
+$number = 20;
 /* 自定义待测接口 */
-$aAPI = ['02', '03', '04', '05', '06'];
+$aAPI = ['05'];
 /* 自定义GET接口 */
 $aAPIGET = ['03'];
 /* 输出头信息的级别 */
 $v = 4;
 /* 输出为文件 */
-$w = false;
+$w = true;
 /* SETTINGS END */
 $vC = '';
 $wC = '';
@@ -41,7 +41,7 @@ foreach ($json_content as $key => $value) {
 			$content .= "Timestamp=`date +%Y-%m-%d_%H-%M-%S`\n";
 			$content .= "Mdfive=`printf 1qaz\!QAZ7881\\\\n2wsx@WSX\\\\n1442978940640|md5sum|cut -d ' ' -f1`\n";
 			// printf 1qaz\!QAZ7881\\n2wsx@WSX\\n1442978940640|md5sum|cut -d ' ' -f1
-			$content .= "ab -n" . $requests . " -c" . $concurrency . " " . $vC . " -k -p \"./data/" . $nameID . ".setting\" -H\"Connection:keep-alive;Accept:application/json;X-Requested-Accept:application/json;X-Service-App:1qaz!QAZ17173;X-Service-Timestamp:\$Timestamp;X-Service-Token:\$Mdfive;\" -T \"application/json\" " . $wC . " \"http://192.168.70.126:9114/api" . $value['api'] . "\" >> ./bench_log/bench_log_\$nowtime.log\n";
+			$content .= "ab -n" . $requests . " -c" . $concurrency . " " . $vC . " -k -p \"./data/" . $nameID . ".setting\" -H \"Connection:keep-alive;Accept:application/json;X-Requested-Accept:application/json;X-Service-App:1qaz!QAZ17173;X-Service-Timestamp:\$Timestamp;X-Service-Token:\$Mdfive;\" -T \"application/json\" " . $wC . " \"http://192.168.70.126:9114/api" . $value['api'] . "\" >> ./bench_log/bench_log_\$nowtime.log\n";
 		} else if ((!isset($value['parameters']) || ($value['methods'][0] == 'GET' && count($value['methods']) == 1)) && $value['modules'] == '7881接口') {
 			$content .= "Timestamp=`date +%Y-%m-%d_%H-%M-%S`\n";
 			$content .= "Mdfive=`printf 1qaz\!QAZ7881\\\\n2wsx@WSX\\\\n1442978940640|md5sum|cut -d ' ' -f1`\n";
